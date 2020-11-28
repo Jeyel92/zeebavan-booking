@@ -33,7 +33,7 @@
                   <div class="form-group row">
                       <div class="col-md-12 col-xs-12">
                           <h3 style="text-align:center; margin-top: 10px;">Fill Out the Form to Complete Your Booking</h3>
-                        
+
                       </div>
                   </div>
                   <div class="form-group row">
@@ -63,7 +63,7 @@
                           <input type="text"  class="form-control" id="step4_ri_email_confirm" name="email_confirm" placeholder="<?php echo get_option('step4_ri_email_confirm'); ?>"  required />
                       </div>
                   </div>
-                  
+
                   <div class="form-group row">
                     <div class="col-md-12 col-xs-12 mt-1">
                         <input type="text"  class="form-control" id="step4_ri_address" name="address" placeholder="<?php echo get_option('step4_ri_address'); ?>"  required />
@@ -71,22 +71,22 @@
                       <div class="col-md-6 col-xs-12 mt-1">
                           <select name="country" id="step4_ri_country" class="form-control zeeba_select2" placeholder="<?php echo get_option('step4_ri_country'); ?>" required>
                             <option value=""><?php echo get_option('step4_ri_country'); ?></option>
-                            <? foreach(countries_list() as $k => $v): ?>
+                            <?php foreach(countries_list() as $k => $v): ?>
                               <option value="<?= $k ?>" <?php if($k=="US") echo 'selected'; ?>><?= $v ?></option>
-                            <? endforeach ?>
+                            <?php endforeach ?>
                           </select>
                       </div>
-                    
+
                       <div class="col-md-6 col-xs-12 mt-1">
                           <input type="text"  class="form-control" id="step4_ri_state" name="state" placeholder="<?php echo get_option('step4_ri_state'); ?>"  required />
                       </div>
-                    
+
                   </div>
                   <div class="form-group row">
                       <div class="col-md-6 col-xs-12 mt-1">
                           <input type="text"  class="form-control" id="step4_ri_city" name="city" placeholder="<?php echo get_option('step4_ri_city'); ?>"  required />
                       </div>
-                      
+
                       <div class="col-md-6 col-xs-12 mt-1">
                           <input type="text"  class="form-control" id="step4_ri_zip" name="zip" placeholder="<?php echo get_option('step4_ri_zip'); ?>"  required />
                       </div>
@@ -129,7 +129,7 @@
                         <input type="checkbox" class="custom-control-input" name="auth_drivers" id="auth_drivers">
                         <label class="custom-control-label" for="auth_drivers"><?php echo get_option('step4_a_driver_allow'); ?></label>
                       </div>
-                                            
+
                     </div>
                   </div>
                 </div>
@@ -229,9 +229,9 @@
                           <div class="col-md-5 col-xs-12 mt-1">
                               <select class="form-control" name="card_year" id="card_year" required data-placeholder="<?php echo get_option('step4_pd_card_year'); ?>" required >
                                   <option value=""><?php echo get_option('step4_pd_card_year'); ?></option>
-                                <? for ( $i = date( 'Y' ); $i <= date( 'Y' ) + 13; $i ++ ): ?>
+                                <?php for ( $i = date( 'Y' ); $i <= date( 'Y' ) + 13; $i ++ ): ?>
                                       <option value="<?= $i ?>"><?= $i ?></option>
-                                <? endfor; ?>
+                                <?php endfor; ?>
                               </select>
                           </div>
                           <div class="col-md-4 col-xs-12 mt-1">
@@ -254,7 +254,7 @@
                         <input type="checkbox" class="custom-control-input" name="step4_fi_flight_enabled" id="step4_fi_flight_enabled">
                         <label class="custom-control-label" for="step4_fi_flight_enabled" style="margin-left: 10px;"><?php echo get_option('step4_fi_flight_enabled'); ?></label>
                       </div>
-                                            
+
                     </div>
                     <div class="col-md-6 col-xs-12 mt-1">
                       <p class="mb-0" for="step4_fi_another_country"><?php echo get_option('step4_fi_another_country'); ?></p>
@@ -311,7 +311,7 @@
                               <!--<h5><?php echo get_option('step4_ag_modal_heading'); ?></h5>
                               <?php echo get_option('step4_ag_text'); ?> -->
                               <p>All renters must be 21 or older, have a valid driver’s license, proof of insurance ID card, and a major credit card/debit card in renters name.</p>
-                              
+
                               <p>You can find the full renter's agreement <a href="/renters-agreement"><em>here</em></a>.</p>
                               <div class="custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" name="agree_fake" id="agree_fake" value="yes" data-toggle="modal" data-target="#agreementModal">
@@ -353,7 +353,7 @@
                   <small class="desc"><?php echo get_option('step4_submit_note'); ?></small>
                 </div>
               <!-- ./button section -->
-              
+
             </div>
             </form>
           </div>
@@ -361,4 +361,3 @@
       </div>
   </div>
 <!-- end step04 -->
-

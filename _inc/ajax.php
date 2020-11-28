@@ -1,4 +1,4 @@
-<?
+<?php
 
 function get_trn_manager() {
 	return new TRNManager('https://weblink.tsdasp.net/requests/service.svc/', 'ZEB01', get_option('booking_api_username'), get_option('booking_api_password'), get_client_ip(), get_client_ip());
@@ -15,7 +15,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit = 'M') {
 	$dist = rad2deg($dist);
 	$miles = $dist * 60 * 1.1515;
 	$unit = strtoupper($unit);
-	
+
 	if($unit == "K") {
 		return ($miles * 1.609344);
 	} else if ($unit == "N") {
@@ -28,7 +28,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit = 'M') {
 
 /*
 add_action('jx_find_location', function($jx) {
-	///* @var wpjxmResponse $jx  
+	///* @var wpjxmResponse $jx
 	$search_keys = [
 		'sys_trn_id',
 		'sys_city',
@@ -43,12 +43,12 @@ add_action('jx_find_location', function($jx) {
 		if(!empty($res) && isset($res->places) && count($res->places) > 0) {
 			$lat1 = $res->places[0]->latitude;
 			$lng1 = $res->places[0]->longitude;
-			
+
 			$locations = get_posts( [
 				'post_type' => 'location',
 				'posts_per_page' => -1,
 			] );
-			
+
 			$min_dist = -1;
 			$min_location = null;
 			foreach($locations as $location) {
@@ -73,7 +73,7 @@ add_action('jx_find_location', function($jx) {
 			}
 		}
 	}
-	
+
 	$args = array(
 		'post_type' => 'location',
 		'posts_per_page' => -1,
@@ -105,7 +105,7 @@ add_action('jx_booking_step_1_submit', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	$errors = array();
 	if(!array_key_exists('pickup_date', $data) || empty($data['pickup_date'])) {
 		$jx->variable('error', 'Pickup Date should be set');
@@ -122,7 +122,7 @@ add_action('jx_booking_step_1_submit', function($jx) {
 			return;
 		}
 	}
-	
+
 	if(!array_key_exists('dropoff_date', $data) || empty($data['dropoff_date'])) {
 		$jx->variable('error', 'Dropoff Date should be set');
 		return;
@@ -136,7 +136,7 @@ add_action('jx_booking_step_1_submit', function($jx) {
 		$jx->variable('error', 'Dropoff time can`t be before Pickup time');
 		return;
 	}
-	
+
 	if(!array_key_exists('van_type', $data) || get_post_type($data['van_type']) !== 'vehicle') {
 		$jx->variable('error', 'Selected van not found');
 		return;
@@ -198,7 +198,7 @@ add_action('jx_booking_step_1_submit', function($jx) {
 		$data['dropoff_address'] = $data['pickup_address'];
 	}
 	$_SESSION['booking']['step_1'] = array_merge($data, array('complete'=>true));
-	
+
 	$jx->redirect(get_permalink(get_page_by_path('booking/step-2')));
 });
 
@@ -206,7 +206,7 @@ add_action('jx_booking_step_modify_submit', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	$errors = array();
 	if(!array_key_exists('reservation', $data) || empty($data['reservation'])) {
 		$jx->variable('error', 'Reservation Code should be set');
@@ -266,9 +266,9 @@ add_action('jx_booking_step_modify_submit', function($jx) {
 	$info['step_4']['complete'] = true;
 	$info['step_4']['modify'] = true;
 	$info['modify'] = true;
-	
+
 	$_SESSION['booking'] = $info;
-	
+
 	$jx->redirect(get_permalink(get_page_by_path('booking/modify')));
 });
 
@@ -281,7 +281,7 @@ add_action('jx_booking_step_2_load', function($jx) {
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
 		$dt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['dropoff_date'].' '.$_SESSION['booking']['step_1']['dropoff_time'])->getTimestamp();
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
-		
+
 		$trn_manager = get_trn_manager();
 
 		$i = 0;
@@ -342,7 +342,7 @@ add_action('jx_booking_step_2_load', function($jx) {
 			$result = array_reduce($rates_render, function($carry, $el) {
 				return $carry.$el['html'];
 			});
-		} 
+		}
 		if(!is_array($rates)) {
 			$booking_error = $rates;
 			ob_start();
@@ -360,7 +360,7 @@ add_action('jx_booking_step_2_submit', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	if(true) { // @TODO validate
 		$rate = [];
 		foreach($_SESSION['booking']['step_2']['rates'] as $rt) {
@@ -370,7 +370,7 @@ add_action('jx_booking_step_2_submit', function($jx) {
 			}
 		}
 		$_SESSION['booking']['step_2'] = array_merge($data, array('rate_data'=>$rate, 'complete'=>true));
-		
+
 		$jx->redirect(get_permalink(get_page_by_path('booking/step-3')));
 	} else {
 		$jx->variable('error', 'Error');
@@ -384,7 +384,7 @@ add_action('jx_booking_step_3_load', function($jx) {
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
 		$rate = $_SESSION['booking']['step_2']['rate'];
 		$class = $_SESSION['booking']['step_2']['rate_data']['class_code'];
-		$days = $_SESSION['booking']['step_2']['rate_data']['total']['days'];		
+		$days = $_SESSION['booking']['step_2']['rate_data']['total']['days'];
 		$trn_manager = get_trn_manager();
 
 		$i = 0;
@@ -395,19 +395,19 @@ add_action('jx_booking_step_3_load', function($jx) {
 			ob_start();
 			include(locate_template( 'panel-booking-extras.php', false, false ));
 			$non_free = ob_get_clean();
-			
+
 			$options = $extras['free'];
 			ob_start();
 			include(locate_template( 'panel-booking-extras.php', false, false ));
 			$free = ob_get_clean();
-			
+
 			$result = 'OK';
-			
+
 			$jx->variable('non_free', $non_free);
 			$jx->variable('free', $free);
 		} else {
 			$booking_error = $extras;
-			
+
 			ob_start();
 			include(locate_template( 'panel-booking-error.php', false, false ));
 			$result = ob_get_clean();
@@ -423,10 +423,10 @@ add_action('jx_booking_step_3_calculate', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	if(true) {
 		$trn_manager = get_trn_manager();
-		
+
 		$pl = $_SESSION['booking']['step_1']['pickup_location'];
 		$dl = $_SESSION['booking']['step_1']['dropoff_location'];
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
@@ -434,10 +434,10 @@ add_action('jx_booking_step_3_calculate', function($jx) {
 		$rate = $_SESSION['booking']['step_2']['rate_data'];
 		$class = $rate['class_code'];
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
-		
+
 		$bill = $trn_manager->get_bill($pl, $dl, $pt, $dt, $rate['id'], $class, $data['options'], $dc);
 		$_SESSION['booking']['step_3'] = array_merge($data, array('bill'=>$bill, 'complete'=>true));
-		
+
 		ob_start();
 		include(locate_template( 'panel-booking-bill.php', false, false ));
 		$result = ob_get_clean();
@@ -454,12 +454,12 @@ add_action('jx_booking_step_3_copy', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	if(!array_key_exists('email', $data) || empty($data['email'])) {
 		$jx->variable('error', 'Email is required');
 	} else if(is_email($data['email'])) {
 		$trn_manager = get_trn_manager();
-		
+
 		$pl = $_SESSION['booking']['step_1']['pickup_location'];
 		$dl = $_SESSION['booking']['step_1']['dropoff_location'];
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
@@ -467,7 +467,7 @@ add_action('jx_booking_step_3_copy', function($jx) {
 		$rate = $_SESSION['booking']['step_2']['rate_data'];
 		$class = $rate['class_code'];
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
-		
+
 		$bill = $trn_manager->get_bill($pl, $dl, $pt, $dt, $rate['id'], $class, $data['options'], $dc);
 		$vehicles = get_posts(array(
 			'post_type' => 'vehicle',
@@ -481,11 +481,11 @@ add_action('jx_booking_step_3_copy', function($jx) {
 			)
 		));
 		$vehicle = count($vehicles) ? $vehicles[0] : array();
-		
+
 		ob_start();
 		include(locate_template( 'email-copy.php', false, false ));
 		$result = ob_get_clean();
-		
+
 		wp_mail($data['email'], 'Your Zeebavans Price Quote', $result, 'Content-type: text/html');
 	} else {
 		$jx->variable('error', 'Email is invalid');
@@ -496,7 +496,7 @@ add_action('jx_booking_step_3_more', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	if(!array_key_exists('first_name', $data) || empty($data['first_name'])) {
 		$jx->variable('error', 'First Name is required');
 	} else if(!array_key_exists('last_name', $data) || empty($data['last_name'])) {
@@ -511,7 +511,7 @@ add_action('jx_booking_step_3_more', function($jx) {
 		$jx->variable('error', 'Message is required');
 	} else {
 		$trn_manager = get_trn_manager();
-		
+
 		$pl = $_SESSION['booking']['step_1']['pickup_location'];
 		$dl = $_SESSION['booking']['step_1']['dropoff_location'];
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
@@ -519,7 +519,7 @@ add_action('jx_booking_step_3_more', function($jx) {
 		$rate = $_SESSION['booking']['step_2']['rate_data'];
 		$class = $rate['class_code'];
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
-		
+
 		$bill = $trn_manager->get_bill($pl, $dl, $pt, $dt, $rate['id'], $class, $data['options'], $dc);
 		$vehicles = get_posts(array(
 			'post_type' => 'vehicle',
@@ -533,15 +533,15 @@ add_action('jx_booking_step_3_more', function($jx) {
 			)
 		));
 		$vehicle = count($vehicles) ? $vehicles[0] : array();
-		
+
 		ob_start();
 		include(locate_template( 'email-more.php', false, false ));
 		$result = ob_get_clean();
-		
-		
+
+
 		$manager_email = gf('reservation_email', 'options');
 		if (empty($manager_email)) {$manager_email = 'valery.alexeev@me.com';}
-		
+
 		wp_mail($manager_email, 'Website information request', $result, 'Content-type: text/html');
 	}
 });
@@ -550,10 +550,10 @@ add_action('jx_booking_step_3_submit', function($jx) {
 	/* @var wpjxmResponse $jx  */
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	if(true) { // @TODO validate
 		$trn_manager = get_trn_manager();
-		
+
 		$pl = $_SESSION['booking']['step_1']['pickup_location'];
 		$dl = $_SESSION['booking']['step_1']['dropoff_location'];
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
@@ -561,12 +561,12 @@ add_action('jx_booking_step_3_submit', function($jx) {
 		$rate = $_SESSION['booking']['step_2']['rate_data'];
 		$class = $rate['class_code'];
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
-		
-		
+
+
 		$bill = $trn_manager->get_bill($pl, $dl, $pt, $dt, $rate['id'], $class, $data['options'], $dc);
-		
+
 		$_SESSION['booking']['step_3'] = array('bill'=>$bill, 'options'=>$data['options'], 'complete'=>true);
-		
+
 		$jx->redirect(get_permalink(get_page_by_path('booking/step-4')));
 	} else {
 		$jx->variable('error', 'Error');
@@ -575,10 +575,10 @@ add_action('jx_booking_step_3_submit', function($jx) {
 
 add_action('jx_booking_step_4_submit', function($jx) {
 	/* @var wpjxmResponse $jx  */
-	
+
 	$data = $jx->getData();
 	unset($data['jx_action']);
-	
+
 	$form = $data['form'];
 	if(!array_key_exists('first_name', $form) || empty($form['first_name'])) {
 		$jx->variable('error', 'First Name should be set');
@@ -665,9 +665,9 @@ add_action('jx_booking_step_4_submit', function($jx) {
 			}
 		}
 		$data['form']['documents'] = implode(' ', $docs);
-		
+
 		$trn_manager = get_trn_manager();
-		
+
 		$pl = $_SESSION['booking']['step_1']['pickup_location'];
 		$dl = $_SESSION['booking']['step_1']['dropoff_location'];
 		$pt = DateTime::createFromFormat(getTimeFormat(), $_SESSION['booking']['step_1']['pickup_date'].' '.$_SESSION['booking']['step_1']['pickup_time'])->getTimestamp();
@@ -677,7 +677,7 @@ add_action('jx_booking_step_4_submit', function($jx) {
 		$dc = $_SESSION['booking']['step_1']['discount_code'];
 		$extraCodes = $_SESSION['booking']['step_3']['options'];
 		$code = array_key_exists('modify', $_SESSION['booking']['step_4']) && $_SESSION['booking']['step_4']['modify'] ? $_SESSION['booking']['step_4']['reservation'] : false;
-		
+
 		// Prepaid
 		$prepaid = gf('reservation_prepaid', 'options');
 		$deposit = 0;
@@ -685,33 +685,33 @@ add_action('jx_booking_step_4_submit', function($jx) {
 			$prepaid = gf('reservation_prepaid_amount', 'options');
 			$deposit = gf('reservation_deposit_amount', 'options');
 		}
-		
+
 		$res = $trn_manager->reserve($pl, $dl, $pt, $dt, $rate['id'], $class, $data['form'], $dc, $extraCodes, $code, $prepaid, $deposit);
 		if(!is_array($res)) {
 			$jx->variable('error', $res);
 			return;
 		}
-		
+
 		//unset($data['form']['card_cvv']);
 		$data['form']['card_number'] = '*** **** **** '.substr($data['form']['card_number'], -4);
-		
+
 		$_SESSION['booking']['step_4'] = array_merge($_SESSION['booking']['step_4'] ?: array(), array('reservation'=> $res['id'], 'form'=>$data['form'], 'complete'=>true));
-		
+
 		ob_start();
 		include(locate_template( 'email-info.php', false, false ));
 		$result = ob_get_clean();
 		wp_mail($_SESSION['booking']['step_4']['form']['email'], 'Your Zeebavans Reservation', $result, 'Content-type: text/html');
-		
+
 		if(count($docs) > 0) {
 			ob_start();
 			include(locate_template( 'email-docs.php', false, false ));
 			$result = ob_get_clean();
-			
+
 			$manager_email = gf('reservation_email', 'options');
 			if (empty($manager_email)) {$manager_email = 'valery.alexeev@me.com';}
 			wp_mail($manager_email, 'Zeebavans Reservation', $result, 'Content-type: text/html');
 		}
-		
+
 		$jx->redirect(get_permalink(get_page_by_path('booking/step-5')));
 	} else {
 		$jx->variable('error', 'Error');

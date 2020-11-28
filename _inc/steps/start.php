@@ -8,20 +8,20 @@
             <select id="pickupStation" name="pick-up-location-search" class="form-control">
               <option style="display:none" value="" disabled="" selected=""></option>
 
-              <? $prev = '';
+              <?php $prev = '';
               $pick_loc = '';
               if(isset($_REQUEST['pickup_location']))
                 $pick_loc = $_REQUEST['pickup_location'];
                 foreach ( $locations as $location ):
                         $post = $location;
-                        $pic_id = $location->ID; 
-                  if ( $prev != gf( 'sys_state_code', $location->ID ) ): ?><? if ( $prev != '' ): ?></optgroup><? endif; ?>
-                    <optgroup label="<? tf( 'sys_state', $location->ID ); ?>"><? $prev = gf( 'sys_state_code', $location->ID );
+                        $pic_id = $location->ID;
+                  if ( $prev != gf( 'sys_state_code', $location->ID ) ): ?><?php if ( $prev != '' ): ?></optgroup><?php endif; ?>
+                    <optgroup label="<?php tf( 'sys_state', $location->ID ); ?>"><?php $prev = gf( 'sys_state_code', $location->ID );
                         endif; ?>
                         <option <?php if(zeeba_get('step_1.pickup_location_select')==$pic_id){ echo 'selected'; } ?>
-                                value="<? echo $location->ID; ?>" data-code="<? tf( 'sys_trn_id', $location->ID ); ?>"
-                                data-group="<? tf( 'sys_state', $location->ID ); ?>" <? if ( 1 == gf( 'location_disabled', $location->ID ) ): ?>disabled <? endif; ?>><? echo $location->post_title; ?></option> 
-                            <? endforeach;
+                                value="<?php echo $location->ID; ?>" data-code="<?php tf( 'sys_trn_id', $location->ID ); ?>"
+                                data-group="<?php tf( 'sys_state', $location->ID ); ?>" <?php if ( 1 == gf( 'location_disabled', $location->ID ) ): ?>disabled <?php endif; ?>><?php echo $location->post_title; ?></option>
+                            <?php endforeach;
                         wp_reset_query(); ?>
                     </optgroup>
               </select>
@@ -46,16 +46,16 @@
               <select class="form-control" id="returnStation" name="drop-off-location-search">
                 <option style="display:none" value="" disabled="" selected=""></option>
 
-                <? $prev = '';
+                <?php $prev = '';
                   foreach ( $locations as $location ):
                         $post = $location;
-                      $drop_id = $location->ID; 
-                    if ( $prev != gf( 'sys_state_code', $location->ID ) ): ?><? if ( $prev != '' ): ?></optgroup><? endif; ?>
-                    <optgroup label="<? tf( 'sys_state', $location->ID ); ?>"><? $prev = gf( 'sys_state_code', $location->ID );
+                      $drop_id = $location->ID;
+                    if ( $prev != gf( 'sys_state_code', $location->ID ) ): ?><?php if ( $prev != '' ): ?></optgroup><?php endif; ?>
+                    <optgroup label="<?php tf( 'sys_state', $location->ID ); ?>"><?php $prev = gf( 'sys_state_code', $location->ID );
                         endif; ?>
-                        <option <?php if(zeeba_get('step_1.dropoff_location_select')==$drop_id){ echo 'selected'; } ?> value="<? echo $location->ID; ?>" data-code="<? tf( 'sys_trn_id', $location->ID ); ?>"
-                                data-group="<? tf( 'sys_state', $location->ID ); ?>" <? if ( 1 == gf( 'location_disabled', $location->ID ) ): ?>disabled <? endif; ?>><? echo $location->post_title; ?></option> 
-                            <? endforeach;
+                        <option <?php if(zeeba_get('step_1.dropoff_location_select')==$drop_id){ echo 'selected'; } ?> value="<?php echo $location->ID; ?>" data-code="<?php tf( 'sys_trn_id', $location->ID ); ?>"
+                                data-group="<?php tf( 'sys_state', $location->ID ); ?>" <?php if ( 1 == gf( 'location_disabled', $location->ID ) ): ?>disabled <?php endif; ?>><?php echo $location->post_title; ?></option>
+                            <?php endforeach;
                         wp_reset_query(); ?>
                     </optgroup>
               </select>
@@ -84,10 +84,10 @@
                 <select class="form-control" id="vehicle">
                   <option style="display:none" value="" disabled="" selected=""></option>
 
-                  <? foreach ( $vehicles as $vehicle ): ?>
-                    <option <? echo ( $vehicle->ID == $selected_id ) ? 'selected' : ''; ?>
-                          value="<? echo $vehicle->ID; ?>"><? echo $vehicle->post_title; ?></option>
-                  <? endforeach; ?>
+                  <?php foreach ( $vehicles as $vehicle ): ?>
+                    <option <?php echo ( $vehicle->ID == $selected_id ) ? 'selected' : ''; ?>
+                          value="<?php echo $vehicle->ID; ?>"><?php echo $vehicle->post_title; ?></option>
+                  <?php endforeach; ?>
                 </select>
             </div><!-- #End Single input group (Select a van) -->
 
@@ -106,7 +106,7 @@
   </div><!-- #End Find Vehicle Form Section -->
 </div>
 
-<?php 
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -120,11 +120,11 @@ jQuery(document).ready(function($) {
       formatTime: 'h:i A',
       validateOnBlur:false,
      allowTimes:[
-      '08:00', '08:30', '09:00', 
-      '09:30', '10:00', '10:30', '11:00', '11:30', 
-      '12:00', '12:30', '13:00', 
+      '08:00', '08:30', '09:00',
+      '09:30', '10:00', '10:30', '11:00', '11:30',
+      '12:00', '12:30', '13:00',
       '13:30', '14:00', '14:30', '15:00', '15:30',
-      '16:00', '16:30', '17:00', 
+      '16:00', '16:30', '17:00',
       '17:30', '18:00', '18:30', '19:00', '20:30', '21.00'
      ]
     });
@@ -133,11 +133,11 @@ jQuery(document).ready(function($) {
       formatTime: 'h:i A',
       validateOnBlur:false,
      allowTimes:[
-      '08:00', '08:30', '09:00', 
-      '09:30', '10:00', '10:30', '11:00', '11:30', 
-      '12:00', '12:30', '13:00', 
+      '08:00', '08:30', '09:00',
+      '09:30', '10:00', '10:30', '11:00', '11:30',
+      '12:00', '12:30', '13:00',
       '13:30', '14:00', '14:30', '15:00', '15:30',
-      '16:00', '16:30', '17:00', 
+      '16:00', '16:30', '17:00',
       '17:30', '18:00', '18:30', '19:00', '20:30', '21.00', '21.30'
      ]
     });
@@ -151,7 +151,7 @@ jQuery(document).ready(function($) {
     jQuery('#returnStation').on('change', function() {
       jQuery('input[name=drop-off-location-id]').val(jQuery('#returnStation option:selected').attr('value'));
       jQuery('input[name=drop-off-location-code]').val(jQuery('#returnStation option:selected').attr('data-code'));
-    }); 
-        
+    });
+
 });
 </script>

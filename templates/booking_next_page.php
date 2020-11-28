@@ -6,7 +6,7 @@
  */
 ?>
 
-<?
+<?php
 
 $locations = get_posts( [
     'post_type'      => 'location',
