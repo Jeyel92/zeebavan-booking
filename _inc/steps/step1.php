@@ -647,9 +647,26 @@
 					];
 				}
 			}
+
+			$non_free = [];
+			foreach($extras['non-free'] as $nonfree){
+				if($nonfree['calc'] == 'DAILY'){
+					$nonfree['desc'] = $nonfree['desc'] . " / $" . floatval($nonfree['amount']) . " day";
+					$nonfree['amount'] = floatval($nonfree['amount']) * $rental_period;
+				}
+				else{
+					$nonfree['amount'] = floatval($nonfree['amount']);
+				}
+
+				$non_free[] = $nonfree;
+			}
+
+			$extras['non-free'] = $non_free;
 			// echo json_encode($bundles);
 			// wp_die();
 			$extras['non-free'] = array_merge($bundles, $extras['non-free']);
+
+
 
 			$hidden_extras = explode(' ', get_option('hidden_options'));
 			$extras['non-free'] = array_filter($extras['non-free'], function($v) use ($hidden_extras) {
@@ -1338,7 +1355,7 @@
 			include(ZEEBAVAN_DIR . "templates/email-info.php");
 			$message = ob_get_contents();
 			ob_end_clean();
-			
+
 			wp_mail( $form['email'], 'Your Zeebavans Reservation', $message, 'Content-type: text/html' );
 
 		// 	$result = va_get_template_part( 'email-docs', array('docs' => $docs), true );
@@ -1347,7 +1364,7 @@
 			include(ZEEBAVAN_DIR . "templates/email-docs.php");
 			$message = ob_get_contents();
 			ob_end_clean();
-			
+
 			wp_mail( $manager_email, 'Zeebavans Reservation', $message, 'Content-type: text/html' );
 
 			$last = $pt - time();

@@ -38,7 +38,7 @@ var zeeba_stripe;
                         return;
                     }
 
-                    // This is an async call. 
+                    // This is an async call.
                     // So we will need to declare onload stuff in another func
                     zeeba_stripe.after_stripe_onload();
                 };
@@ -72,7 +72,7 @@ var zeeba_stripe;
                 zeeba_stripe.el_card.mount('#card-number');
 
                 zeeba_stripe.el_card_exp = stripe_elements.create('cardExpiry', { style: stripe_styles });
-                zeeba_stripe.el_card_exp.mount('#card-exp');                
+                zeeba_stripe.el_card_exp.mount('#card-exp');
             }
             else {
                 zeeba_stripe.el_card = stripe_elements.create('card', { style: stripe_styles });
@@ -140,34 +140,34 @@ jQuery(document).ready(function () {
     flightEnabled();
     step4Submit();
     //step3RateCalculate();
-    
+
     /* start new design js*/
-    
-        
+
+
         // checking if already any value exist
         let zeebaLhgInputVal =  jQuery(".zeeba-lhg-single-input-group input").val();
         let zeebaLhgSelectVal =  jQuery(".zeeba-lhg-single-input-group select").val();
         if(zeebaLhgInputVal != ""){
-            jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");   
+            jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         }
         if(zeebaLhgSelectVal != ""){
-            jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");   
+            jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         }
-        
+
         jQuery(".zeeba-lhg-single-input-group input").each(function() {
             if(jQuery(this).val() != ""){
-                jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");   
+                jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
             }
         });
-        
+
         // jQuery(".zeeba-lhg-single-input-group select").each(function() {
         //     if(jQuery(this).val() != ""){
-        //         jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");   
+        //         jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         //     }
         // });
-        
-        
-    
+
+
+
         // Input & Select field gets animated when clicked
         jQuery(".zeeba-lhg-single-input-group input,.zeeba-lhg-single-input-group select").on("click",function(){
             jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
@@ -200,9 +200,9 @@ jQuery(document).ready(function () {
             jQuery(this).fadeOut(function(){
                 jQuery(this).next().fadeIn();
             });
-            
+
         });
-        
+
         if(jQuery("input[name=returnToPickupStation]").is(":checked")){
             jQuery(".zeeba-lhg-return-location-checkbox").fadeOut(function(){
                 jQuery(".zeeba-lhg-return-location-checkbox").next().fadeIn();
@@ -216,14 +216,14 @@ jQuery(document).ready(function () {
                 jQuery(this).prev().fadeIn();
                 jQuery(this).prev().find("input").prop("checked",false)
             });
-            
+
             jQuery('#returnStation').val(''); // Set select value as null
             jQuery(this).siblings("label").removeClass("zeeba-lhg-label-animated-up").css({"transition":".4s"});
-            
+
         });
     /* end new design js*/
-    
-    
+
+
     let step1_menu_width = jQuery("#step1-menu").children().eq(0).outerWidth(true);
     let step1_menu_height = jQuery("#step1-menu").children().eq(0).outerHeight(true);
     jQuery("#vehicle").outerWidth(step1_menu_width);
@@ -243,14 +243,14 @@ jQuery(document).ready(function () {
     /* Select Location */
     jQuery('.zeeba_select2').select2();
     /* ./Select Location */
-    
+
     /* form step selector */
 
     // set default step
     let currentStep = 0,
         isValid = false,
         isLoading = false;
-    
+
 
     /**
      * @param isLoading
@@ -265,7 +265,7 @@ jQuery(document).ready(function () {
     }
     // set default loader status to false
     setLoaderStatus(false);
-    
+
     /**
      * @param step
      * @returns boolean
@@ -274,7 +274,7 @@ jQuery(document).ready(function () {
 
         return true;
     }
-    
+
     /**
      * @param: step
      * @returns void
@@ -306,7 +306,7 @@ jQuery(document).ready(function () {
     });
     /* ./adding additional driver */
 
-    let loc, return_loc, pick_up_date, drop_off_date, value_vehicle, next_url; 
+    let loc, return_loc, pick_up_date, drop_off_date, value_vehicle, next_url;
     let data_code, data_code_return, value_loc, value_return_loc, get_days;
 
     jQuery('#stepper2').on('click', function(){
@@ -347,14 +347,14 @@ jQuery(document).ready(function () {
                 return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
                 pick_up_date = jQuery("#pickup-datetimepicker").val();
                 drop_off_date = jQuery("#dropoff-datetimepicker").val();
-                value_vehicle = jQuery("#vehicle").find('option:selected').attr('value'); 
+                value_vehicle = jQuery("#vehicle").find('option:selected').attr('value');
                 data_code = jQuery("#location-code").val();
                 data_code_return = jQuery("#return-location-code").val();
                 value_loc = jQuery("#location").val();
                 value_return_loc = jQuery("#return-location").val();
                 discount = jQuery("#promotion").val();
                 next_url = jQuery("input[name=next_url]").val();
-                
+
                 let data = {
                     'action': 'step1',
                     'data': {
@@ -381,7 +381,7 @@ jQuery(document).ready(function () {
                 // We can also pass the url value separately from ajaxurl for front end AJAX implementations
                 jQuery.post(ajax_url, data, function(error) {
                     error = jQuery.parseJSON(error);
-                    
+
                     if(error['ok'] && error['ok'] == 'ok'){
                         window.location.replace('/'+next_url);
                         // jQuery('.step_1_submit').text('Find Vehicle');
@@ -424,7 +424,7 @@ jQuery(document).ready(function () {
                             jQuery('.step_1_submit').text('Find Vehicle');
                         }
                     }
-                    
+
                 });
 
             });
@@ -435,18 +435,18 @@ jQuery(document).ready(function () {
                 jQuery(this).text('loading.....');
                 loc = jQuery("#pickupStation option:selected").text()+', '+jQuery("#pickupStation option:selected").attr('data-group');
                 return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
-                
+
                 // loc = jQuery("#pickupStation").val();
                 // return_loc = jQuery("#returnStation").val();
                 pick_up_date = jQuery("#pickup-datetimepicker").val();
                 drop_off_date = jQuery("#dropoff-datetimepicker").val();
-                value_vehicle = jQuery("#vehicle").find('option:selected').attr('value'); 
+                value_vehicle = jQuery("#vehicle").find('option:selected').attr('value');
                 data_code = jQuery("#location-code").val();
                 data_code_return = jQuery("#return-location-code").val();
                 value_loc = jQuery("#location").val();
                 value_return_loc = jQuery("#return-location").val();
                 discount = jQuery("#promotion").val();
-                
+
                 let data = {
                     'action': 'step1',
                     'data': {
@@ -472,7 +472,7 @@ jQuery(document).ready(function () {
                 // We can also pass the url value separately from ajaxurl for front end AJAX implementations
                 jQuery.post(ajax_url, data, function(error) {
                     error = jQuery.parseJSON(error);
-                    
+
                     if(error['ok'] && error['ok'] == 'ok'){
 
                         currentStep = 1;
@@ -503,7 +503,7 @@ jQuery(document).ready(function () {
                         jQuery('#dropoff_date').html(error['drop_off_date']);
                         jQuery("#days-count").html(error['rental_period'] + " Day(s)");
                         jQuery('.step_1_submit').text('Find Vehicle');
-                        
+
                     }
                     else{
                         jQuery('.step_1_submit').text('Find Vehicle');
@@ -542,7 +542,7 @@ jQuery(document).ready(function () {
                             setStep(currentStep);
                         }
                     }
-                    
+
                 });
 
             });
@@ -551,9 +551,9 @@ jQuery(document).ready(function () {
         function vehicle_lists(error){
             let i = 0;
             let all_vehicles = '';
-            
+
             if(error['rates_render']){
-                for(vehicle in error['rates_render']) { 
+                for(vehicle in error['rates_render']) {
                     if(i==0){
                         all_vehicles += '<div class="col-md-12 mt-3">\
                               <div class="row ' + error['rates_render'][vehicle]["html"]["rate"]["vehicle-active"] + '">\
@@ -782,13 +782,13 @@ jQuery(document).ready(function () {
                 let data = {
                         'action': 'step2',
                         'data': {
-                            'rate': rate_id,  
-                        } 
+                            'rate': rate_id,
+                        }
                 };
                 jQuery.post(url, data, function(response) {
                     error = jQuery.parseJSON(response);
                     console.log(error);
-                    
+
                     if(error['result'] && error['result'] == 'OK'){
 
                         currentStep = 3;
@@ -803,7 +803,7 @@ jQuery(document).ready(function () {
                         jQuery('#stepper3').addClass('active');
                         jQuery('#stepper4').removeClass('active');
                         jQuery('#stepper4').removeClass('completed');
-                        
+
                         // // start step3 show data
                         // jQuery('#step3-van-title').text(error['rate']['vehicle_title']);
                         // jQuery('#step3-van-img').attr('src',error['rate']['side_image']);
@@ -815,7 +815,7 @@ jQuery(document).ready(function () {
                         // start step3 show rate data
                         $rate_quote_tbl_content = rateTableData();
                         jQuery('.rate_quote_tbl tbody').html($rate_quote_tbl_content);
-                        $step3_rate_total_charge = 0                        
+                        $step3_rate_total_charge = 0
 						// jQuery('#rental_rate_detail').text(error['rate']['total']['days']+' day(s) @ '+error['rate']['amount']);
                         jQuery('#rental_rate_detail').text(error['rate']['total']['days']+' day(s) @ '+error['rate']['daily_rate']);
                         jQuery('#rental_rate_cost').text('$'+error['rate']['total']['rate_charge']);
@@ -841,7 +841,7 @@ jQuery(document).ready(function () {
                             $free_mile = 'Unlimited';
                         }
                         jQuery('#rental_rate_mileage').text($free_mile);
-                        
+
                         $pre_total = error['rate']['total']['charge'];
                         $charity_amount = roundupCalculation($pre_total)
                         jQuery('#step3-roundup span').text('$'+$charity_amount['charity']);
@@ -871,28 +871,42 @@ jQuery(document).ready(function () {
                         jQuery('.rental_date_range').text(error['pick_up_date']+' - '+error['drop_off_date']);
 
                         // end step3 show rate data
-                        
+
                         if(error['rental_period'] > 1 ){
                             coverage_data='';
-                            for(bundle in error['bundles']) { 
-                                coverage_data = coverage_data + '<tr>\
-                                            <td class="w-4/6">'+error['bundles'][bundle]['desc']+'\
-                                                <span title="'+error['bundles'][bundle]['note']+'">\
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle ml-1 w-4 text-gray-600">\
-                                                    <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>\
-                                            </td>\
-                                            <td class="w-1/6">'+error['bundles'][bundle]['amount'].toFixed(2)+'</td>\
-                                            <td class="w-1/6">\
-                                                <input class="select-coverage" name="opt['+error['bundles'][bundle]['id']+']" data-opt="'+error['bundles'][bundle]['id']+'" value="'+error['bundles'][bundle]['amount'].toFixed(2)+'" type="checkbox" title="'+error['bundles'][bundle]['desc']+'">\
-                                            </td>\
-                                        </tr>';
-                            }
+                            // for(bundle in error['bundles']) {
+                            //     coverage_data = coverage_data + '<tr>\
+                            //                 <td class="w-4/6">'+error['bundles'][bundle]['desc']+'\
+                            //                     <span title="'+error['bundles'][bundle]['note']+'">\
+                            //                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle ml-1 w-4 text-gray-600">\
+                            //                         <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>\
+                            //                 </td>\
+                            //                 <td class="w-1/6">'+error['bundles'][bundle]['amount'].toFixed(2)+'</td>\
+                            //                 <td class="w-1/6">\
+                            //                     <input class="select-coverage" name="opt['+error['bundles'][bundle]['id']+']" data-opt="'+error['bundles'][bundle]['id']+'" value="'+error['bundles'][bundle]['amount'].toFixed(2)+'" type="checkbox" title="'+error['bundles'][bundle]['desc']+'">\
+                            //                 </td>\
+                            //             </tr>';
+                            // }
+                            non_free = error['extras']['non-free']
+                            for(index in non_free) {
+                                    coverage_data = coverage_data + '<tr>\
+                                                <td class="w-4/6">'+non_free[index]['desc']+'\
+                                                    <span title="'+non_free[index]['note']+'">\
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle ml-1 w-4 text-gray-600">\
+                                                        <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>\
+                                                </td>\
+                                                <td class="w-1/6">'+non_free[index]['amount'].toFixed(2)+'</td>\
+                                                <td class="w-1/6">\
+                                                    <input class="select-coverage" name="opt['+non_free[index]['id']+']" data-opt="'+non_free[index]['id']+'" value="'+non_free[index]['amount'].toFixed(2)+'" type="checkbox" title="'+non_free[index]['desc']+'">\
+                                                </td>\
+                                            </tr>';
+                                }
                         }else{
                             coverage_data='<tr><td colspan="3" class="text-center">'+error['rental_period_text']+'</td></tr>';
                         }
                         jQuery('#coverage-data').html(coverage_data);
                         safety_data='';
-                        for(extra_safety in error['extras']['free']) { 
+                        for(extra_safety in error['extras']['free']) {
                             safety_data = safety_data + '<tr>\
                                         <td class="w-4/6">'+error['extras']['free'][extra_safety]['desc']+'\
                                             <span title="'+error['extras']['free'][extra_safety]['notes']+'">\
@@ -910,12 +924,12 @@ jQuery(document).ready(function () {
                     }
                     jQuery('.step_2_submit').text('Select Vehicle');
                     jQuery('.step_2_submit').removeClass('disabled');
-                    
+
                 });
 
             });
         }
-        
+
         // Step3 js.........
             function rateTableData(){
                 $content = '<tr>\
@@ -1048,7 +1062,7 @@ jQuery(document).ready(function () {
                         $subtotal = jQuery('#rental_rate_subtotal').text().replace('$','');
                         $subtotal =subtraction($c_cost, $subtotal);
                         jQuery('#rental_rate_subtotal').text('$'+$subtotal);
-                        
+
                         //$total = jQuery('#rental_rate_total').text().replace('$','');
                         //console.log(jQuery('#rental_rate_total').text());
                         //$total = subtraction($c_cost,$total);
@@ -1074,12 +1088,12 @@ jQuery(document).ready(function () {
                             $subtotal = jQuery('#rental_rate_subtotal').text().replace('$','');
                             $subtotal =sum(jQuery('.select-coverage:checked').val(), $subtotal);
                             jQuery('#rental_rate_subtotal').text('$'+$subtotal);
-                            
+
                             //$total = jQuery('#rental_rate_total').text().replace('$','');
                             $total = sum(jQuery('#rental_rate_tax').text().replace('$',''),$subtotal);
                             jQuery('#rental_rate_total').text('$'+$total);
                             jQuery('#rental_rate_total_input').val($total);
-                            
+
 
                             //step5
                             jQuery('.rate-append-data').after('<tr>\
@@ -1116,10 +1130,10 @@ jQuery(document).ready(function () {
                             'data': {
                                 'data': submit_data,
                                 'total':jQuery('#rental_rate_total_input').val(),
-                                'charity':jQuery('#charity_total').val() 
-                            } 
+                                'charity':jQuery('#charity_total').val()
+                            }
                     };
-                    
+
                     jQuery.post(url, data, function(response) {
                         response = jQuery.parseJSON(response);
                         currentStep = 4;
@@ -1137,7 +1151,7 @@ jQuery(document).ready(function () {
                         jQuery('#step4_rental_period').text(response['rental_period']);
                         jQuery('#step4_total_price').text('$' + response['total']);
 
-                        
+
                         // step_4_agreement();
                         // step_4_add_driver();
                         // flightEnabled();
@@ -1147,7 +1161,7 @@ jQuery(document).ready(function () {
 
                         jQuery('#step_3_submit').text('Last Step: 4');
                         jQuery('#step_3_submit').removeClass('disabled');
-                        
+
                     });
                 });
 
