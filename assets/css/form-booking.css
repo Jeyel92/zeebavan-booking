@@ -1,0 +1,340 @@
+/*New Form Bookin*/
+#start_form_container {
+    background: #ffffff;
+}
+@media (min-width: 765px) {
+    #start_form_container {
+        padding: 0 55px;
+    }
+}
+
+
+#start_form_container label {
+    color: #ff56a7;
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 1.3
+}
+
+#start_form_container .zeeba-lhg-single-input-group input {
+    background: transparent;
+    /* outline: none !important;
+    box-shadow: none !important;
+    position: relative; */
+    z-index: 1;
+    color: #787878;
+    padding: .875em 0 .5em;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+#start_form_container .form-control {
+    /* padding: 12px !important;
+    height: 50px; */
+
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 2px solid #ced4da;
+}
+
+#start_form_container .form-control:focus {
+
+    border-bottom: 2px solid #fd58a7;
+    color: #fd58a7;
+}
+
+#start_form_container .zeeba-lhg-single-input-group input.input-location {
+    /* padding-left: 1.875rem; */
+    padding: 12px
+}
+
+#start_form_container .zeeba-lhg-return-location-checkbox {
+    margin-top: 26px;
+}
+
+#start_form_container .zeeba-lhg-single-return-location-close {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* color: #000000; */
+    padding-bottom: .5rem;
+    /* padding-right: 0; */
+    cursor: pointer;
+    /* text-align: left; */
+    /* font-size: 1rem; */
+    line-height: 1.25;
+}
+
+/* #start_form_container .zeeba-lhg-single-return-location-close span {
+    display: inline-block;
+    vertical-align: middle;
+    width: .8125rem;
+    height: 1.125rem;
+    margin: .375rem 0;
+} */
+
+#start_form_container .zeeba-lhg-single-return-location-close span div.zeeba-lhg-close-button {
+    /* display: inline-block; */
+    position: relative;
+    width: 100%;
+    /* padding-bottom: 100%; */
+    /* vertical-align: middle; */
+    background: transparent;
+    top: -14px;
+    height: 20px;
+    min-width: 20px !important;
+}
+
+/* #start_form_container .zeeba-lhg-single-return-location-close span div.zeeba-lhg-close-button svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 100%;
+} */
+
+#start_form_container .zeeba-lhg-single-return-location-close span div.zeeba-lhg-close-button svg * {
+    fill: #787878;
+}
+
+
+
+
+/* auto complete */
+.autocomplete-suggestions {
+    /* border: 1px solid #999 !important; */
+    background: #FFF;
+    overflow: auto;
+    font-size:1.3em;
+    line-height: 1.3;
+}
+
+.autocomplete-suggestions::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  .autocomplete-suggestions::-webkit-scrollbar-track {
+    background: #cccccc;
+  }
+
+  /* Handle */
+  .autocomplete-suggestions::-webkit-scrollbar-thumb {
+    background: #fd58a7;
+  }
+
+  /* Handle on hover */
+  .autocomplete-suggestions::-webkit-scrollbar-thumb:hover {
+    background: #d94c8f;
+
+  }
+
+.autocomplete-group {
+    font-weight: bold;
+    color: #fd58a7;
+
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-suggestion:hover{
+    background: transparent;
+    color: #fd58a7;
+}
+
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #fd58a7;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+}
+
+.autocomplete-group strong {
+    display: block;
+    border-bottom: 1px solid #000;
+}
+
+
+/* auto complete */
+/*litepicker*/
+.litepicker{
+    font-size: 1.3em;
+    font-weight: 700;
+    font-family: inherit !important;
+}
+.litepicker .container__days .day-item:hover{
+    background:#fd58a7!important ;
+    box-shadow:unset !important;
+    -webkit-box-shadow:unset !important
+}
+.litepicker .container__days .day-item.is-today:hover{
+    color: var(--litepickerDayColorHover);
+}
+.litepicker .container__days .day-item.is-locked:hover{
+    background: transparent!important;
+}
+.litepicker .container__days .day-item.is-in-range{
+    color:#ffffff !important;
+}
+
+.litepicker .container__days .day-item.is-start-date:before,.litepicker .container__days .day-item.is-end-date:after{
+/* .litepicker .container__days .day-item.is-start-date.is-end-date:before,.litepicker .container__days .day-item.is-start-date.is-end-date:after{ */
+    font-family: "Font Awesome 5 Free";
+    display: block;
+    font-size: 1.5em;
+    position: absolute;
+
+}
+.litepicker .container__days .day-item.is-start-date:before{
+    content: "\f0da";
+}
+.litepicker .container__days .day-item.is-end-date:after{
+    content: "\f0d9";
+    /* transform: translateX(1em); */
+    /* transform: translatey(1em); */
+    transform: translate(1em,-0.89em)
+}
+.litepicker .container__days .day-item.is-start-date.is-end-date:before{
+    content: "\f0da ";
+}
+/* .litepicker .container__days .day-item.is-start-date.is-end-date:after{
+    content: "\f0d9";
+    transform: translate(1em,-0.89em)
+} */
+:root {
+    --litepickerDayIsTodayColor: #fd58a7 !important;
+     --litepickerDayColorHover:#000000 !important;
+    --litepickerDayIsStartBg:#fd58a7!important;
+    --litepickerDayIsEndBg:#fd58a7!important;
+    --litepickerDayIsInRange:#fd58a7!important;
+    --litepickerDayIsEndColor:#000000 !important;
+    --litepickerDayIsStartColor:#000000 !important;
+}
+
+/*litepicker*/
+/* TimePicker */
+.xdsoft_datetimepicker {
+    width: 8em;
+    padding:0;
+    font-family: inherit !important;
+    color:#000000 !important;
+}
+button.xdsoft_prev,button.xdsoft_next{
+    display:none !important;
+}
+
+.xdsoft_timepicker{
+    width: 100% !important;
+    margin: 0 !important;
+}
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div{
+    background: #ffffff;
+    font-size:1.3em;
+    border-color:transparent !important;
+    color:#000000;
+}
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box{
+    border:0px !important;
+}
+.xdsoft_scrollbar{
+    background: #cccccc;
+}
+.xdsoft_scrollbar >.xdsoft_scroller{
+   background:  #fd58a7 !important;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td:hover{
+    background:  #d94c8f  !important;
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div:hover{
+    background: transparent !important;
+    border:1px solid #fd58a7 !important;
+    color:#000000 !important;
+}
+.xdsoft_time_box {
+    padding-right: 7px;
+}
+/*TimePicker*/
+
+
+
+
+.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-find-vehicle-form-heading {
+    color: #fd58a7;
+}
+
+
+
+
+.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group select option {
+    color: #000;
+}
+
+.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group select {
+    /*:focus .zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group input:focus{*/
+    border: 1px solid #ced4da;
+}
+
+
+
+/* .zeeba-lhg-find-vehicle-form-new .zeeba-lhg-return-location-checkbox label{
+    color: #fff;
+    font-size:16px;
+} */
+/* .zeeba-lhg-single-return-location-group{
+    display: none;
+} */
+
+
+/* .zeeba-lhg-find-vehicle-form .col-md-12{
+    position: relative;
+    width: 100%;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+    margin-top:0px;
+    margin-bottom:0px;
+} */
+.zeeba-lhg-find-vehicle-form-new button[type="submit"] {
+    /* color: #ced4da; */
+    background-color: #fd58a7;
+    display: inline-block;
+    /* font-weight: 400; */
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-color: #fd58a7 !important;
+    /* padding: 8px 16px; */
+    font-size: 1.5em;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-label-animated-up {
+    font-size: inherit !important;
+    color: #fd58a7 !important;
+    top: inherit !important;
+    background: inherit !important;
+    z-index: inherit !important;
+    padding: 0 !important;
+    transition: .4s !important;
+}
+
+
+/*end new design css*/

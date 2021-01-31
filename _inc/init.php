@@ -46,7 +46,7 @@ add_action('admin_enqueue_scripts', 'zeebavans_scripts');
 function zeebavans_scripts_frontend()
 {
     /* CSS */
-    
+
     wp_register_style('boostrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css', array(), true, false);
     wp_enqueue_style('boostrap-css');
 
@@ -65,6 +65,9 @@ function zeebavans_scripts_frontend()
     wp_register_style('zeebavans-step2-vehicle-css', ZEEBAVAN_ASSETS . 'css/step/step-2-vehicle.css', array(), '1.3', false);
     wp_enqueue_style('zeebavans-step2-vehicle-css');
 
+    wp_register_style('formbooking-css', ZEEBAVAN_ASSETS . 'css/form-booking.css', array(), false, false);
+    wp_enqueue_style('formbooking-css');
+
     /* JS */
     wp_register_script('boostrap-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js', array(), true, true);
     wp_enqueue_script('boostrap-js');
@@ -74,7 +77,12 @@ function zeebavans_scripts_frontend()
     wp_register_script('select2-js', ZEEBAVAN_ASSETS. 'js/select2.min.js', array(), true, true);
     wp_enqueue_script('select2-js');
 
-    wp_register_script('datetimepicker-js', ZEEBAVAN_ASSETS. 'js/jquery.datetimepicker.full.min.js', array(), true, true);
+
+    wp_register_script('moment-js', ZEEBAVAN_ASSETS. 'js/moment.js', array(), true, true);
+    wp_enqueue_script('moment-js');
+
+    // wp_register_script('datetimepicker-js', ZEEBAVAN_ASSETS. 'js/jquery.datetimepicker.full.min.js', array(), true, true);
+    wp_register_script('datetimepicker-js', ZEEBAVAN_ASSETS. 'datetimepicker-master/jquery.datetimepicker.js', array(), true, true);
     wp_enqueue_script('datetimepicker-js');
 
     wp_register_script('jquery.ui.widget-js', ZEEBAVAN_ASSETS. 'js/jquery.ui.widget.js', array(), true, true);
@@ -82,6 +90,7 @@ function zeebavans_scripts_frontend()
 
     wp_register_script('jquery.fileupload-js', ZEEBAVAN_ASSETS. 'js/jquery.fileupload.js', array(), true, true);
     wp_enqueue_script('jquery.fileupload-js');
+
 
     //step3 js
         wp_register_script('zeebavans-step3-scripts-js', ZEEBAVAN_ASSETS. 'js/step/step3.js', array(), '1.3', true);
@@ -92,6 +101,13 @@ function zeebavans_scripts_frontend()
 
     wp_register_script('zeeba-scripts-js', ZEEBAVAN_ASSETS. 'js/scripts.js', array(), '3.10', true);
     wp_enqueue_script('zeeba-scripts-js');
+
+    wp_register_script('litepicker-js', 'https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js', array(), true, true);
+    wp_enqueue_script('litepicker-js');
+
+
+    wp_register_script('jquery.autocomplete-js', ZEEBAVAN_ASSETS. 'js/jquery.autocomplete.js', array(), true, true);
+    wp_enqueue_script('jquery.autocomplete-js');
 
 
 }
@@ -104,7 +120,7 @@ function zeebavans_scripts_admin()
     /* CSS */
     wp_register_style('zeeba-admin-css', ZEEBAVAN_ASSETS. 'css/zeeba-admin.css', array(), true, false);
     wp_enqueue_style('zeeba-admin-css');
-    
+
 
     /* JS */
     wp_register_script('zeeba-admin-js', ZEEBAVAN_ASSETS. 'js/zeeba-admin.js', array(), true, true);
