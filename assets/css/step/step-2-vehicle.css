@@ -98,10 +98,10 @@ svg {
 .height-80 {
     height: 80px;
 }
-.full-width {
+/* .full-width {
     margin-left: -35px;
     margin-right: -32px;
-}
+} */
 @media (min-width: 992px){
 .OffergridCarTile__wrapper {
     width: 33.33%;
@@ -245,11 +245,11 @@ ul.stepper li.completed a .circle {
     z-index: 6;
 }
 .step-1-container{
-    background: #000;
-    color: #777;
+    background: #cccccc;
+    color: #ff56a7;
 }
 .step-1-container label {
-    color: #888;
+    color: #ff56a7;
     font-size: 10px;
 }
 

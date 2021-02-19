@@ -99,10 +99,10 @@ svg {
 .height-80 {
     height: 80px;
 }
-.full-width {
+/* .full-width {
     margin-left: -35px;
     margin-right: -32px;
-}
+} */
 @media (min-width: 992px){
 .OffergridCarTile__wrapper {
     width: 33.33%;

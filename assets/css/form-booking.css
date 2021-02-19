@@ -2,11 +2,11 @@
 #start_form_container {
     background: #ffffff;
 }
-@media (min-width: 765px) {
+/* @media (min-width: 765px) {
     #start_form_container {
         padding: 0 55px;
     }
-}
+} */
 
 
 #start_form_container label {
@@ -98,7 +98,33 @@
     fill: #787878;
 }
 
+#start_form_container .zeeba-lhg-single-input-group select option {
+    color: #000;
+}
 
+#start_form_container .zeeba-lhg-single-input-group select {
+    border: 1px solid #ced4da;
+}
+
+#start_form_container button[type="submit"] {
+    /* color: #ced4da; */
+    background-color: #fd58a7;
+    display: inline-block;
+    /* font-weight: 400; */
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-color: #fd58a7 !important;
+    /* padding: 8px 16px; */
+    font-size: 1.5em;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
 
 /* auto complete */
@@ -208,18 +234,22 @@
 .litepicker .container__days .day-item.is-start-date.is-end-date:before{
     content: "\f0da ";
 }
+
+.litepicker .month-item-header button{
+    min-width:inherit;
+}
 /* .litepicker .container__days .day-item.is-start-date.is-end-date:after{
     content: "\f0d9";
     transform: translate(1em,-0.89em)
 } */
 :root {
-    --litepickerDayIsTodayColor: #fd58a7 !important;
-     --litepickerDayColorHover:#000000 !important;
-    --litepickerDayIsStartBg:#fd58a7!important;
-    --litepickerDayIsEndBg:#fd58a7!important;
-    --litepickerDayIsInRange:#fd58a7!important;
-    --litepickerDayIsEndColor:#000000 !important;
-    --litepickerDayIsStartColor:#000000 !important;
+    --litepicker-is-today-color: #fd58a7 !important;
+     --litepicker-day-color-hover:#000000 !important;
+    --litepicker-is-start-color-bg:#fd58a7!important;
+    --litepicker-is-end-color-bg:#fd58a7!important;
+    --litepicker-is-in-range-color:#fd58a7!important;
+    --litepicker-is-end-color:#000000 !important;
+    --litepicker-is-start-color:#000000 !important;
 }
 
 /*litepicker*/
@@ -277,14 +307,6 @@ button.xdsoft_prev,button.xdsoft_next{
 
 
 
-.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group select option {
-    color: #000;
-}
-
-.zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group select {
-    /*:focus .zeeba-lhg-find-vehicle-form-new .zeeba-lhg-single-input-group input:focus{*/
-    border: 1px solid #ced4da;
-}
 
 
 
@@ -305,25 +327,6 @@ button.xdsoft_prev,button.xdsoft_next{
     margin-top:0px;
     margin-bottom:0px;
 } */
-.zeeba-lhg-find-vehicle-form-new button[type="submit"] {
-    /* color: #ced4da; */
-    background-color: #fd58a7;
-    display: inline-block;
-    /* font-weight: 400; */
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    border-color: #fd58a7 !important;
-    /* padding: 8px 16px; */
-    font-size: 1.5em;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
 
 
 .zeeba-lhg-find-vehicle-form-new .zeeba-lhg-label-animated-up {

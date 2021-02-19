@@ -102,7 +102,10 @@ function zeebavans_scripts_frontend()
     wp_register_script('zeeba-scripts-js', ZEEBAVAN_ASSETS. 'js/scripts.js', array(), '3.10', true);
     wp_enqueue_script('zeeba-scripts-js');
 
-    wp_register_script('litepicker-js', 'https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js', array(), true, true);
+    // wp_register_script('litepicker-js', 'https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js', array(), true, true);
+
+    wp_register_script('litepicker-js', 'https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js', array(), true, true);
+
     wp_enqueue_script('litepicker-js');
 
 

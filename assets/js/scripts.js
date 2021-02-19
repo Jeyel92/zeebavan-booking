@@ -145,8 +145,8 @@ jQuery(document).ready(function () {
 
 
         // checking if already any value exist
-        let zeebaLhgInputVal =  jQuery(".zeeba-lhg-single-input-group input").val();
-        let zeebaLhgSelectVal =  jQuery(".zeeba-lhg-single-input-group select").val();
+        let zeebaLhgInputVal =  jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group input").val();
+        let zeebaLhgSelectVal =  jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group select").val();
         if(zeebaLhgInputVal != ""){
             jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         }
@@ -154,7 +154,7 @@ jQuery(document).ready(function () {
             jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         }
 
-        jQuery(".zeeba-lhg-single-input-group input").each(function() {
+        jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group input").each(function() {
             if(jQuery(this).val() != ""){
                 jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
             }
@@ -169,13 +169,13 @@ jQuery(document).ready(function () {
 
 
         // Input & Select field gets animated when clicked
-        jQuery(".zeeba-lhg-single-input-group input,.zeeba-lhg-single-input-group select").on("click",function(){
+        jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group input,.zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group select").on("click",function(){
             jQuery(this).siblings("label").addClass("zeeba-lhg-label-animated-up");
         });
 
 
         // Input field blur
-        jQuery(".zeeba-lhg-single-input-group input").on("blur",function(){
+        jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group input").on("blur",function(){
             if(jQuery(this).val() == ""){
                 jQuery(this).siblings("label").removeClass("zeeba-lhg-label-animated-up").css({"transition":".4s"});
             }
@@ -183,11 +183,11 @@ jQuery(document).ready(function () {
 
 
         // Select field blur
-        jQuery(".zeeba-lhg-single-input-group select").on("blur",function(){
+        jQuery(".zeeba-lhg-find-vehicle-form .zeeba-lhg-single-input-group select").on("blur",function(){
 
-            jQuery(this).css({
-                "color":"#fff"
-            })
+            // jQuery(this).css({
+            //     "color":"#fff"
+            // })
 
             if(jQuery(this).val() == ""){
                 jQuery(this).siblings("label").removeClass("zeeba-lhg-label-animated-up").css({"transition":".4s"});
@@ -211,10 +211,21 @@ jQuery(document).ready(function () {
 
 
         // Return location close button click
+        // jQuery(".zeeba-lhg-single-input-group .zeeba-lhg-close-button").on("click",function(){
+        //     jQuery(this).parent().fadeOut(function(){
+        //         jQuery(this).prev().fadeIn();
+        //         jQuery(this).prev().find("input").prop("checked",false)
+        //     });
+
+        //     jQuery('#returnStation').val(''); // Set select value as null
+        //     jQuery(this).siblings("label").removeClass("zeeba-lhg-label-animated-up").css({"transition":".4s"});
+
+        // });
+
         jQuery(".zeeba-lhg-single-input-group .zeeba-lhg-close-button").on("click",function(){
-            jQuery(this).parent().fadeOut(function(){
-                jQuery(this).prev().fadeIn();
-                jQuery(this).prev().find("input").prop("checked",false)
+            jQuery('.zeeba-lhg-single-input-group.zeeba-lhg-single-return-location-group').fadeOut(function(){
+                jQuery(".zeeba-lhg-return-location-wrapper .zeeba-lhg-return-location-checkbox").fadeIn();
+                jQuery(".zeeba-lhg-return-location-wrapper .zeeba-lhg-return-location-checkbox #zeeba-lhg-return-location").prop("checked",false)
             });
 
             jQuery('#returnStation').val(''); // Set select value as null
@@ -343,10 +354,16 @@ jQuery(document).ready(function () {
         function start_submit() {
             jQuery('.step_1_submit').click( function(){
                 jQuery(this).text('loading.....');
-                loc = jQuery("#pickupStation option:selected").text()+', '+jQuery("#pickupStation option:selected").attr('data-group');
-                return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
-                pick_up_date = jQuery("#pickup-datetimepicker").val();
-                drop_off_date = jQuery("#dropoff-datetimepicker").val();
+                // loc = jQuery("#pickupStation option:selected").text()+', '+jQuery("#pickupStation option:selected").attr('data-group');
+                loc = jQuery("#pickupStation").val();
+
+                // return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
+                return_loc = jQuery("#returnStation").val();
+
+                // pick_up_date = jQuery("#pickup-datetimepicker").val();
+                pick_up_date = jQuery("#pickup-datepicker").val() + " " + jQuery("#pickup-timepicker").val() ;
+                // drop_off_date = jQuery("#dropoff-datetimepicker").val();
+                drop_off_date = jQuery("#dropoff-datepicker").val() + " " + jQuery("#dropoff-timepicker").val() ;
                 value_vehicle = jQuery("#vehicle").find('option:selected').attr('value');
                 data_code = jQuery("#location-code").val();
                 data_code_return = jQuery("#return-location-code").val();
@@ -433,13 +450,14 @@ jQuery(document).ready(function () {
         function step_1_submit() {
             jQuery('.step_1_submit').click( function(){
                 jQuery(this).text('loading.....');
-                loc = jQuery("#pickupStation option:selected").text()+', '+jQuery("#pickupStation option:selected").attr('data-group');
-                return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
+                // loc = jQuery("#pickupStation option:selected").text()+', '+jQuery("#pickupStation option:selected").attr('data-group');
+                loc = jQuery("#pickupStation").val();
+                // return_loc = jQuery("#returnStation option:selected").text()+', '+jQuery("#returnStation option:selected").attr('data-group');
+                return_loc = jQuery("#returnStation").val();
 
-                // loc = jQuery("#pickupStation").val();
-                // return_loc = jQuery("#returnStation").val();
-                pick_up_date = jQuery("#pickup-datetimepicker").val();
-                drop_off_date = jQuery("#dropoff-datetimepicker").val();
+                pick_up_date = jQuery("#pickup-datepicker").val() + " " + jQuery("#pickup-timepicker").val() ;
+                drop_off_date = jQuery("#dropoff-datepicker").val() + " " + jQuery("#dropoff-timepicker").val() ;
+
                 value_vehicle = jQuery("#vehicle").find('option:selected').attr('value');
                 data_code = jQuery("#location-code").val();
                 data_code_return = jQuery("#return-location-code").val();
